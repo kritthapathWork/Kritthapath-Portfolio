@@ -81,7 +81,7 @@ export default function Navbar() {
           mobileOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <div className="px-4 sm:px-6 py-4 space-y-1 border-t border-[var(--border-color)]">
+        <div className="px-4 sm:px-6 py-4 space-y-1 border-t border-[var(--border-color)] mt-2">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
