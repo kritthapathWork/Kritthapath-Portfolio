@@ -37,17 +37,6 @@ const CONTACT_LINKS = [
       </svg>
     ),
   },
-  {
-    label: 'Line',
-    value: 'kritthapathwork',
-    href: 'https://line.me/ti/p/~kritthapathwork',
-    desc: 'เพิ่มเพื่อน Line ผมได้เลยครับ',
-    icon: (
-      <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
-        <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63.346 0 .628.285.628.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.282.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314" />
-      </svg>
-    ),
-  },
 ];
 
 export default function ContactSection() {
@@ -69,13 +58,18 @@ export default function ContactSection() {
         </AnimateOnScroll>
 
         {/* Contact Cards */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 mb-10 sm:mb-12">
+        <div className="grid sm:grid-cols-3 gap-3 sm:gap-4 mb-10 sm:mb-12">
           {CONTACT_LINKS.map((link, i) => (
             <AnimateOnScroll key={link.label} delay={i * 100}>
               <a
-                href={link.href}
+                href={link.href.startsWith('http') ? link.href : '#'}
                 target={link.href.startsWith('http') ? '_blank' : undefined}
                 rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                onClick={(e) => {
+                  if (!link.href.startsWith('http')) {
+                    e.preventDefault();
+                  }
+                }}
                 className="glass-card rounded-xl sm:rounded-2xl p-4 sm:p-6 flex items-start gap-3 sm:gap-4 group h-full"
               >
                 <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-[var(--brand-primary)]/10 flex items-center justify-center text-[var(--brand-primary)] group-hover:bg-[var(--brand-primary)] group-hover:text-white transition-all duration-300 shrink-0">
@@ -88,9 +82,11 @@ export default function ContactSection() {
                   </div>
                   <p className="text-[10px] sm:text-xs text-[var(--text-secondary)] mt-1 hidden sm:block">{link.desc}</p>
                 </div>
-                <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--text-secondary)] shrink-0 group-hover:text-[var(--brand-primary)] group-hover:translate-x-1 transition-all mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
-                </svg>
+                {link.href.startsWith('http') && (
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[var(--text-secondary)] shrink-0 group-hover:text-[var(--brand-primary)] group-hover:translate-x-1 transition-all mt-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                  </svg>
+                )}
               </a>
             </AnimateOnScroll>
           ))}
@@ -147,15 +143,6 @@ export default function ContactSection() {
               ไม่ว่าจะเป็นโอกาสใหม่ ๆ หรือแค่อยากแลกเปลี่ยนความรู้ ยินดีครับ
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-              <a
-                href="mailto:kritthapathwork@gmail.com"
-                className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 sm:py-4 rounded-2xl bg-[var(--brand-primary)] text-white font-semibold text-sm sm:text-base hover:opacity-90 transition-all duration-300 hover:scale-[1.02] active:scale-[0.98] shadow-lg shadow-[var(--brand-primary)]/20"
-              >
-                ส่ง Email
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
-                </svg>
-              </a>
               <a
                 href="https://github.com/kritthapathWork"
                 target="_blank"
